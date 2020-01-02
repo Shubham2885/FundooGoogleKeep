@@ -1,0 +1,11 @@
+spring:
+    datasource:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/dbFundooUserSecurity
+      username: root
+      password: admin@123
+    jpa:
+      hibernate:
+        ddl-auto: update
+        generate-ddl : true
+        show-sql : true
