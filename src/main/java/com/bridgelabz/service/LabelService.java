@@ -109,6 +109,17 @@ public class LabelService {
 		return new LabelResponse(LabelResponse.STATUS200, "Remove Label", null);
 	}
 	
+	public LabelResponse deleteLabel(String token,int labelId) {
+		if(labelId<=0)
+			return new LabelResponse(LabelResponse.STATUS200, "Invalid NoteId or LabelId", null);
+		Label label = getLabel(token,labelId);
+		List<Notes> notes = label.getNotes();
+		notes.forEach(list->list.getLabels().removeIf(i->i.getLabelId()==labelId));
+		label.setNotes(notes);
+		labelRepository.delete(label);
+		return new LabelResponse(LabelResponse.STATUS200, "Label Delete", null);
+	}
+	
 	/**
 	 * @purpose : return a label of user
 	 * @param token : current user token
@@ -142,7 +153,7 @@ public class LabelService {
 	}
 	
 	/**
-	 * @purpose : this method return the perticular note of the perticular user using note id
+	 * @purpose : this method return the particular note of the particular user using note id
 	 * @param noteId : note id of current user
 	 * @param token : token of current user
 	 * @return : return the note

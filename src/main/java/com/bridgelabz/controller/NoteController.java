@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bridgelabz.dto.NoteDto;
+import com.bridgelabz.dto.ReminderDateDto;
 import com.bridgelabz.response.NoteResponse;
 import com.bridgelabz.response.UserResponse;
 import com.bridgelabz.service.NoteService;
@@ -74,5 +75,25 @@ public class NoteController {
 	@GetMapping("/getAllInArchive")
 	public NoteResponse getAllInArchive(@RequestHeader String token) {
 		return noteService.getAllNoteInArchive(token);
+	}
+	
+	@PutMapping("/setReminder")
+	public NoteResponse setReminder(@RequestHeader String token,@RequestBody ReminderDateDto reminderDateDto,@RequestParam int noteId) {
+		return noteService.setReminder(token, reminderDateDto, noteId);
+	}
+	
+	@GetMapping("/sortNoteByTitle")
+	public NoteResponse sortNoteByTitle(@RequestHeader String token) {
+		return null;
+	}
+	
+	@GetMapping("/sortNoteByDiscription")
+	public NoteResponse sortNoteByDiscription(@RequestHeader String token) {
+		return null;
+	}
+	
+	@GetMapping("/sortNoteByDate")
+	public NoteResponse sortNoteByDate(@RequestHeader String token) {
+		return null;
 	}
 }

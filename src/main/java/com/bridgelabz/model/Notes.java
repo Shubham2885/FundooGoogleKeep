@@ -1,6 +1,7 @@
 package com.bridgelabz.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,6 +15,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -31,6 +35,11 @@ public class Notes {
 	private boolean isTrash = false;
 	private boolean isArchive = false;
 	private boolean isPin = false;
+	
+	@CreationTimestamp
+	private Date creationTimeStamp;
+	@UpdateTimestamp
+	private Date updateTimeStamp;
 	
 	@ManyToOne
 	@JoinColumn(name="id", nullable=false)
@@ -103,5 +112,17 @@ public class Notes {
 	}
 	public void setPin(boolean isPin) {
 		this.isPin = isPin;
+	}
+	public Date getCreationTimeStamp() {
+		return creationTimeStamp;
+	}
+	public Date getUpdateTimeStamp() {
+		return updateTimeStamp;
+	}
+	public void setCreationTimeStamp(Date creationTimeStamp) {
+		this.creationTimeStamp = creationTimeStamp;
+	}
+	public void setUpdateTimeStamp(Date updateTimeStamp) {
+		this.updateTimeStamp = updateTimeStamp;
 	}
 }

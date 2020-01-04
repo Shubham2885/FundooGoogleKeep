@@ -31,8 +31,8 @@ public class LabelController {
 	}
 	
 	@DeleteMapping("/deleteLabel")
-	public LabelResponse deleteLabel(){
-		return null;
+	public LabelResponse deleteLabel(@RequestHeader String token,@RequestParam int labelId){
+		return labelService.deleteLabel(token, labelId);
 	}
 	
 	@PutMapping("/renameLabel")
