@@ -21,22 +21,32 @@ public class Label {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int labelId;
 	private String label;
+	
 	@ManyToOne
 	@JoinColumn(name = "userId",nullable = false)
 	private User user = new User();
 	
+	/*
+	private int userId;
+	
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}*/
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name ="Note_Label", joinColumns = {
 			@JoinColumn(name = "labelId",nullable = false)},
 			inverseJoinColumns = {
 					@JoinColumn(name="noteId",nullable = false)})
 	@JsonIgnoreProperties(value = "labels")
-	private List<Notes> notes = new ArrayList<>();
+	private List<Note> notes = new ArrayList<>();
 	
-	public List<Notes> getNotes() {
+	public List<Note> getNotes() {
 		return notes;
 	}
-	public void setNotes(List<Notes> notes) {
+	public void setNotes(List<Note> notes) {
 		this.notes = notes;
 	}
 	public int getLabelId() {
@@ -45,16 +55,18 @@ public class Label {
 	public String getLabel() {
 		return label;
 	}
-	public User getUser() {
-		return user;
-	}
+	
 	public void setLabelId(int labelId) {
 		this.labelId = labelId;
 	}
 	public void setLabel(String label) {
 		this.label = label;
 	}
+	
 	public void setUser(User user) {
 		this.user = user;
+	}
+	public User getUser() {
+		return user;
 	}
 }

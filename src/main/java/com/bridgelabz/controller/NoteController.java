@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bridgelabz.dto.NoteDto;
 import com.bridgelabz.dto.ReminderDateDto;
 import com.bridgelabz.response.NoteResponse;
+import com.bridgelabz.response.NoteResponse2;
 import com.bridgelabz.response.UserResponse;
 import com.bridgelabz.service.NoteService;
 
@@ -44,7 +45,7 @@ public class NoteController {
 	}
 	
 	@GetMapping("/allNote")
-	public NoteResponse getAllNote(@RequestHeader String token)
+	public NoteResponse2 getAllNote(@RequestHeader String token)
 	{
 		return noteService.getAllNotes(token);
 	}
@@ -73,7 +74,7 @@ public class NoteController {
 	}
 	
 	@GetMapping("/getAllInArchive")
-	public NoteResponse getAllInArchive(@RequestHeader String token) {
+	public NoteResponse2 getAllInArchive(@RequestHeader String token) {
 		return noteService.getAllNoteInArchive(token);
 	}
 	
@@ -84,16 +85,21 @@ public class NoteController {
 	
 	@GetMapping("/sortNoteByTitle")
 	public NoteResponse sortNoteByTitle(@RequestHeader String token) {
-		return null;
+		return noteService.sortNoteByTitle(token);
 	}
 	
-	@GetMapping("/sortNoteByDiscription")
+	@GetMapping("/sortNoteByDescription")
 	public NoteResponse sortNoteByDiscription(@RequestHeader String token) {
-		return null;
+		return noteService.sortNoteByDescription(token);
 	}
 	
 	@GetMapping("/sortNoteByDate")
 	public NoteResponse sortNoteByDate(@RequestHeader String token) {
-		return null;
+		return noteService.sortNoteByDate(token);
+	}
+	
+	@GetMapping("/collaborateUserToNote")
+	public NoteResponse collaborateUserToNote(@RequestHeader String token,@RequestParam int userId,@RequestParam int noteId) {
+		return noteService.collaborateUserToNote(token, userId, noteId);
 	}
 }
