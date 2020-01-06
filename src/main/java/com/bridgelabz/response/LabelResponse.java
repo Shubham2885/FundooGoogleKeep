@@ -3,7 +3,7 @@ package com.bridgelabz.response;
 import java.util.List;
 
 import com.bridgelabz.model.Label;
-import com.bridgelabz.model.Notes;
+import com.bridgelabz.model.Note;
 
 public class LabelResponse {
 

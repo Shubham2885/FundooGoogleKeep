@@ -14,7 +14,7 @@ import com.bridgelabz.exception.custome.LabelNotFound;
 import com.bridgelabz.exception.custome.NoteNotAvailable;
 import com.bridgelabz.exception.custome.UserNotFoundException;
 import com.bridgelabz.model.Label;
-import com.bridgelabz.model.Notes;
+import com.bridgelabz.model.Note;
 import com.bridgelabz.model.User;
 import com.bridgelabz.reposiitory.LabelRepository;
 import com.bridgelabz.reposiitory.NoteRepository;
@@ -44,6 +44,7 @@ public class LabelService {
 	public LabelResponse createLabel(String token,LabelDto labelDto){
 		Label label = modelMapper.map(labelDto, Label.class);
 		label.setUser(getUser(token));
+		//label.setUserId(getUser(token).getId());
 		labelRepository.save(label);
 		return new LabelResponse(LabelResponse.STATUS200, "Label Created", null);
 	}
@@ -57,7 +58,7 @@ public class LabelService {
 	 */
 	public LabelResponse addLabelToNote(String token,int noteId,int labelId) {
 		Label label = getLabel(token, labelId);
-		Notes note = getNote(noteId, token);
+		Note note = getNote(noteId, token);
 		label.getNotes().add(note);
 		labelRepository.save(label);
 		return new LabelResponse(LabelResponse.STATUS200, "Label Added", null);
@@ -102,7 +103,7 @@ public class LabelService {
 			return new LabelResponse(LabelResponse.STATUS200, "Invalid NoteId or LabelId", null);
 		Label label = getLabel(token, labelId);
 //		Notes note = getNote(noteId, token);
-		List<Notes> notes=label.getNotes();
+		List<Note> notes=label.getNotes();
 		notes.removeIf(i->i.getNoteId()==noteId);
 		label.setNotes(notes);
 		labelRepository.save(label);
@@ -113,7 +114,7 @@ public class LabelService {
 		if(labelId<=0)
 			return new LabelResponse(LabelResponse.STATUS200, "Invalid NoteId or LabelId", null);
 		Label label = getLabel(token,labelId);
-		List<Notes> notes = label.getNotes();
+		List<Note> notes = label.getNotes();
 		notes.forEach(list->list.getLabels().removeIf(i->i.getLabelId()==labelId));
 		label.setNotes(notes);
 		labelRepository.delete(label);
@@ -158,10 +159,10 @@ public class LabelService {
 	 * @param token : token of current user
 	 * @return : return the note
 	 */
-	private Notes getNote(int noteId,String token){
-		List<Notes> listOfNote = noteRepository.findByUserId(getUser(token).getId());
+	private Note getNote(int noteId,String token){
+		List<Note> listOfNote = noteRepository.findByUserId(getUser(token).getId());
 		try {
-			Notes note =(listOfNote.stream().filter(n->n.getNoteId()==noteId).collect(Collectors.toList())).get(0);	
+			Note note =(listOfNote.stream().filter(n->n.getNoteId()==noteId).collect(Collectors.toList())).get(0);	
 			return note;
 		}catch (NoteNotAvailable e) {
 			throw new NoteNotAvailable("Note Not Available");

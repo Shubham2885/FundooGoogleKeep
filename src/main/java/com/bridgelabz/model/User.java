@@ -6,14 +6,20 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name ="User")
@@ -34,6 +40,15 @@ public class User {
 	private Date creationTimeStamp;
 	@UpdateTimestamp
 	private Date updateTimeStamp;
+
+/*	
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name="User_Collaborator",joinColumns = {
+			@JoinColumn(name="id",nullable = false)},inverseJoinColumns = {
+					@JoinColumn(name="noteId",nullable = false)})
+	@JsonIgnoreProperties(value = "listOfUserCollaboratorId")
+	private List<Note> listOfNoteId = new ArrayList<>();
+	
 	
 //	public List<Notes> getNotes() {
 //		return notes;
@@ -43,6 +58,14 @@ public class User {
 //		this.notes = notes;
 //	}
 
+	public List<Note> getListOfNoteId() {
+		return listOfNoteId;
+	}
+
+	public void setListOfNoteId(List<Note> listOfNoteId) {
+		this.listOfNoteId = listOfNoteId;
+	}
+*/
 	public int getId() {
 		return id;
 	}

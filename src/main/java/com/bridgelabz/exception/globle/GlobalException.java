@@ -80,7 +80,7 @@ public class GlobalException {
 	@ExceptionHandler(ExpiredJwtException.class)
 	public ResponseEntity<NoteResponse> accessDeniedException(ExpiredJwtException e)
 	{
-		return new ResponseEntity<NoteResponse>(new NoteResponse(404, e.getMessage(), null), HttpStatus.NOT_FOUND);
+		return new ResponseEntity<NoteResponse>(new NoteResponse(404, "Token is expired", null), HttpStatus.NOT_FOUND);
 	}
 	
 	

@@ -1,11 +1,9 @@
-package com.bridgelabz.model;
+package com.bridgelabz.response;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,19 +12,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.bridgelabz.model.Label;
+import com.bridgelabz.model.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@Entity
-@Table(name = "Notes")
-public class Notes {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+public class ResponseNote {
 	private int noteId;
 	private String title;
 	private String description;
@@ -36,20 +30,14 @@ public class Notes {
 	private boolean isArchive = false;
 	private boolean isPin = false;
 	
-	@CreationTimestamp
+	
 	private Date creationTimeStamp;
-	@UpdateTimestamp
+	
 	private Date updateTimeStamp;
+
+	 
+	private int userId;
 	
-	@ManyToOne
-	@JoinColumn(name="id", nullable=false)
-	private User user = new User();
-	
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name ="Note_Label",joinColumns = {
-			@JoinColumn(name="noteId",nullable = false)},
-			inverseJoinColumns = {@JoinColumn(name="labelId",nullable = false)})
-	@JsonIgnoreProperties(value = "notes")
 	private List<Label> labels = new ArrayList<>();
 	
 	public List<Label> getLabels() {
@@ -58,11 +46,13 @@ public class Notes {
 	public void setLabels(List<Label> labels) {
 		this.labels = labels;
 	}
-	public User getUser() {
-		return user;
+	
+	
+	public int getUserId() {
+		return userId;
 	}
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 	public int getNoteId() {
 		return noteId;
@@ -91,7 +81,6 @@ public class Notes {
 	public void setNoteId(int noteId) {
 		this.noteId = noteId;
 	}
-	
 	public void setTitle(String title) {
 		this.title = title;
 	}

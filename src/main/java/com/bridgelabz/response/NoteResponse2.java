@@ -7,7 +7,7 @@ import com.bridgelabz.model.Note;
 import com.bridgelabz.model.User;
 
 
-public class NoteResponse {
+public class NoteResponse2 {
 
 	//bad request
 	public static final Integer STATUS400=400;
@@ -26,9 +26,9 @@ public class NoteResponse {
 	public static final String INVALID_USERNAME="Invalid Username";
 	private Integer status;
 	private String message;
-	private List<Note> notes;
+	private List<Object> notes;
 
-	public NoteResponse(Integer status, String message, List<Note> notes) {
+	public NoteResponse2(Integer status, String message, List<Object> notes) {
 		this.status = status;
 		this.message = message;
 		this.notes = notes;
@@ -42,7 +42,7 @@ public class NoteResponse {
 		return status;
 	}
 
-	public List<Note> getNotes() {
+	public List<Object> getNotes() {
 		return notes;
 	}
 
@@ -54,7 +54,7 @@ public class NoteResponse {
 		this.status = status;
 	}
 
-	public void setNotes(List<Note> userData) {
+	public void setNotes(List<Object> userData) {
 		this.notes = userData;
 	}
 }

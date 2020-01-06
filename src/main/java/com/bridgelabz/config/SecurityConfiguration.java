@@ -16,6 +16,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.bridgelabz.filter.JwtRequestFilter;
 import com.bridgelabz.service.MyUserDetailsService;
 
+import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+@EnableSwagger2
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	
@@ -32,6 +38,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable().authorizeRequests()
+			.antMatchers("/v2/api-docs", "/configuration/**","/swagger*/**","/webjars/**").permitAll()
 			.antMatchers("/fundoo/users").permitAll()
 			.antMatchers("/fundoo/register").permitAll()
 			.antMatchers("/fundoo/login").permitAll()
@@ -64,4 +71,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	{
 		return new SimpleMailMessage();
 	}
+	
+	@Bean
+	   public Docket productApi()
+	   {
+	       return new Docket(DocumentationType.SWAGGER_2)
+	        .select()
+	               .apis(RequestHandlerSelectors.basePackage("com.bridgelabz"))
+	               .paths(PathSelectors.any())
+	               //
+	               .build();
+
+	   }
 }
