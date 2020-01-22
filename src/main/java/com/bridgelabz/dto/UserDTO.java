@@ -1,12 +1,12 @@
 /******************************************************************************
- *  Compilation:  javac -d bin ElasticSearchConfig.java
- *  Execution:    java -cp bin com.bridgelabz.config;
+ *  Compilation:  javac -d bin UserDTO.java
+ *  Execution:    java -cp bin com.bridgelabz.dto;
  *  						  
  *  
- *  Purpose:      ElasticSearch configuration class
+ *  Purpose:      This class validate and hold details of user and transfer data to service
  *  @author  Shubham Chavan
  *  @version 1.0
- *  @since   11-12-2019
+ *  @since   29-12-2019
  *
  ******************************************************************************/
 package com.bridgelabz.dto;
