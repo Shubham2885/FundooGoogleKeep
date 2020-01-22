@@ -1,12 +1,13 @@
 /******************************************************************************
- *  Compilation:  javac -d bin ElasticSearchConfig.java
- *  Execution:    java -cp bin com.bridgelabz.config;
+ *  Compilation:  javac -d bin LabelDto.java
+ *  Execution:    java -cp bin com.bridgelabz.dto;
  *  						  
  *  
- *  Purpose:      ElasticSearch configuration class
+ *  Purpose:      This is Label Dto which is used transfer object from controller 
+ 		  to Service class
  *  @author  Shubham Chavan
  *  @version 1.0
- *  @since   11-12-2019
+ *  @since   29-12-2019
  *
  ******************************************************************************/
 package com.bridgelabz.dto;
