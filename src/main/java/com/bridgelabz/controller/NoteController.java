@@ -1,8 +1,24 @@
+/******************************************************************************
+ *  Compilation:  javac -d bin ElasticSearchConfig.java
+ *  Execution:    java -cp bin com.bridgelabz.config;
+ *  						  
+ *  
+ *  Purpose:      ElasticSearch configuration class
+ *  @author  Shubham Chavan
+ *  @version 1.0
+ *  @since   11-12-2019
+ *
+ ******************************************************************************/
 package com.bridgelabz.controller;
+
+import java.io.IOException;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,91 +31,127 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bridgelabz.dto.NoteDto;
 import com.bridgelabz.dto.ReminderDateDto;
-import com.bridgelabz.response.NoteResponse;
-import com.bridgelabz.response.NoteResponse2;
-import com.bridgelabz.response.UserResponse;
-import com.bridgelabz.service.NoteService;
+import com.bridgelabz.response.Response;
+import com.bridgelabz.service.INoteService;
 
 @RestController
 @RequestMapping("/fundoo/note")
 public class NoteController {
+	
+	// private final Logger LOG = LoggerFactory.getLogger(getClass());
 
 	@Autowired
-	private NoteService noteService;
+	private INoteService noteService;
 	@PostMapping("/create")
-	public NoteResponse create(@Valid @RequestBody NoteDto noteDto,@RequestHeader String token)
+	public Response create(@Valid @RequestBody NoteDto noteDto,@RequestHeader String token) throws IOException
 	{
+		 //LOG.info("Getting user with ID {}.", token);
 		return noteService.create(noteDto, token);
 	}
 	
 	@DeleteMapping("/delete")
-	public NoteResponse delete(@RequestParam int noteId,@RequestHeader String token)
+	public Response delete(@RequestParam int noteId,@RequestHeader String token) throws IOException
 	{
 		return noteService.delete(noteId,token);
 	}
 	
 	@PutMapping("/update")
-	public NoteResponse update(@Valid @RequestBody NoteDto noteDto,@RequestParam int noteId,@RequestHeader String token)
+	public Response update(@Valid @RequestBody NoteDto noteDto,@RequestParam int noteId,@RequestHeader String token)
 	{
 		return noteService.update(noteDto, noteId,token);
 	}
 	
 	@GetMapping("/allNote")
-	public NoteResponse2 getAllNote(@RequestHeader String token)
+	public Response getAllNote(@RequestHeader String token) throws IOException
 	{
 		return noteService.getAllNotes(token);
 	}
 	
 	@GetMapping("/isArchive")
-	public NoteResponse isArchive(@RequestParam int noteId,@RequestHeader String token)
+	public Response isArchive(@RequestParam int noteId,@RequestHeader String token)
 	{
 		return noteService.isArchive(noteId,token);
 	}
 	
 	@GetMapping("/isTrash")
-	public NoteResponse isTrash(@RequestParam int noteId,@RequestHeader String token)
+	public Response isTrash(@RequestParam int noteId,@RequestHeader String token) throws IOException
 	{
 		return noteService.isTrash(noteId,token);
 	}
 	
 	@GetMapping("/isPin")
-	public NoteResponse isPin(@RequestParam int noteId,@RequestHeader String token)
+	public Response isPin(@RequestParam int noteId,@RequestHeader String token) throws IOException
 	{
 		return noteService.isPin(noteId,token);
 	}
 	
 	@GetMapping("/getAllInTrash")
-	public NoteResponse getAllInTrash(@RequestHeader String token) {
+	public Response getAllInTrash(@RequestHeader String token) {
 		return noteService.getAllNoteInTrash(token);
 	}
 	
 	@GetMapping("/getAllInArchive")
-	public NoteResponse2 getAllInArchive(@RequestHeader String token) {
+	public Response getAllInArchive(@RequestHeader String token) {
 		return noteService.getAllNoteInArchive(token);
 	}
 	
 	@PutMapping("/setReminder")
-	public NoteResponse setReminder(@RequestHeader String token,@RequestBody ReminderDateDto reminderDateDto,@RequestParam int noteId) {
+	public Response setReminder(@RequestHeader String token,@RequestBody ReminderDateDto reminderDateDto,@RequestParam int noteId) throws IOException {
 		return noteService.setReminder(token, reminderDateDto, noteId);
 	}
 	
+	@GetMapping("/removeReminder")
+	public Response removeReminder(@RequestHeader String token,@RequestParam int noteId) throws IOException {
+		return noteService.removeReminder(token, noteId);
+	}
+	
+	@PutMapping("/editReminder")
+	public Response editReminder(@RequestHeader String token,@RequestBody ReminderDateDto reminderDateDto,@RequestParam int noteId) throws IOException {
+		return noteService.editReminder(token, reminderDateDto, noteId);
+	}
+	
 	@GetMapping("/sortNoteByTitle")
-	public NoteResponse sortNoteByTitle(@RequestHeader String token) {
+	public Response sortNoteByTitle(@RequestHeader String token) {
 		return noteService.sortNoteByTitle(token);
 	}
 	
 	@GetMapping("/sortNoteByDescription")
-	public NoteResponse sortNoteByDiscription(@RequestHeader String token) {
+	public Response sortNoteByDiscription(@RequestHeader String token) {
 		return noteService.sortNoteByDescription(token);
 	}
 	
 	@GetMapping("/sortNoteByDate")
-	public NoteResponse sortNoteByDate(@RequestHeader String token) {
+	public Response sortNoteByDate(@RequestHeader String token) {
 		return noteService.sortNoteByDate(token);
 	}
 	
 	@GetMapping("/collaborateUserToNote")
-	public NoteResponse collaborateUserToNote(@RequestHeader String token,@RequestParam int userId,@RequestParam int noteId) {
+	public Response collaborateUserToNote(@RequestHeader String token,@RequestParam int userId,@RequestParam int noteId) throws IOException {
 		return noteService.collaborateUserToNote(token, userId, noteId);
+	}
+	
+	@DeleteMapping("/removeMySelfFromCollaborateNote")
+	public Response removeMySelfFromCollaborateNote(@RequestHeader String token,@RequestParam int noteId) {
+		return noteService.removeMySelf(token, noteId);
+	}
+	
+	@DeleteMapping("/deleteCollaborateUser")
+	public Response deleteCollaborateUser(@RequestHeader String token,@RequestParam int noteId,@RequestParam int userId) {
+		return noteService.deleteCollaborateUser(token, noteId, userId);
+	}
+	
+	@GetMapping("/searchNoteByTitle")
+	public Response searchNoteByTitle(@RequestHeader String token,@RequestParam String title) throws IOException {
+		return noteService.searchNoteByTitle(token, title);
+	}
+	
+	@GetMapping("/searchNoteByDescription")
+	public Response searchNoteByDescription(@RequestHeader String token,@RequestParam String description) throws IOException {
+		return noteService.searchNoteByDescription(token, description);
+	}
+	
+	@GetMapping("/searchNoteByText")
+	public Response searchNoteByText(@RequestHeader String token,@RequestParam String text) throws IOException {
+		return noteService.searchNoteByText(token, text);
 	}
 }

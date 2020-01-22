@@ -1,3 +1,14 @@
+/******************************************************************************
+ *  Compilation:  javac -d bin ElasticSearchConfig.java
+ *  Execution:    java -cp bin com.bridgelabz.config;
+ *  						  
+ *  
+ *  Purpose:      ElasticSearch configuration class
+ *  @author  Shubham Chavan
+ *  @version 1.0
+ *  @since   11-12-2019
+ *
+ ******************************************************************************/
 package com.bridgelabz.controller;
 
 import javax.validation.Valid;
@@ -15,43 +26,43 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bridgelabz.dto.LabelDto;
 import com.bridgelabz.dto.RenameLabelDto;
-import com.bridgelabz.response.LabelResponse;
-import com.bridgelabz.service.LabelService;
+import com.bridgelabz.response.Response;
+import com.bridgelabz.service.ILabelService;
 
 @RestController
 @RequestMapping("/fundoo")
 public class LabelController {
 
 	@Autowired
-	LabelService labelService;
+	ILabelService labelService;
 
 	@PostMapping("/note/addLabel")
-	public LabelResponse addLabel(@RequestHeader String token,@RequestParam int noteId,@RequestParam int labelId){
+	public Response addLabel(@RequestHeader String token,@RequestParam int noteId,@RequestParam int labelId){
 		return labelService.addLabelToNote(token, noteId, labelId);
 	}
 	
 	@DeleteMapping("/deleteLabel")
-	public LabelResponse deleteLabel(@RequestHeader String token,@RequestParam int labelId){
+	public Response deleteLabel(@RequestHeader String token,@RequestParam int labelId){
 		return labelService.deleteLabel(token, labelId);
 	}
 	
 	@PutMapping("/renameLabel")
-	public LabelResponse updateLabel(@Valid @RequestBody RenameLabelDto renameLabelDto,@RequestHeader String token,@RequestParam int labelId){
+	public Response updateLabel(@Valid @RequestBody RenameLabelDto renameLabelDto,@RequestHeader String token,@RequestParam int labelId){
 		return labelService.renameLabel(renameLabelDto, token, labelId);
 	}
 	
-	@GetMapping("/createLabel")
-	public LabelResponse createLabel(@Valid @RequestBody LabelDto labelDto,@RequestHeader String token){
+	@PostMapping("/createLabel")
+	public Response createLabel(@Valid @RequestBody LabelDto labelDto,@RequestHeader String token){
 		return labelService.createLabel(token, labelDto);
 	}
 	
 	@GetMapping("/getAllLabel")
-	public LabelResponse getAllLabel(@RequestHeader String token) {
+	public Response getAllLabel(@RequestHeader String token) {
 		return labelService.getAllLabel(token);
 	}
 	
 	@PutMapping("/note/removeLabelOnNote")
-	public LabelResponse removeLabelOnNote(@RequestHeader String token,@RequestParam int noteId,@RequestParam int labelId) {
+	public Response removeLabelOnNote(@RequestHeader String token,@RequestParam int noteId,@RequestParam int labelId) {
 		return labelService.removeLabelOnNote(token, noteId, labelId);
 	}
 }

@@ -1,8 +1,26 @@
+/******************************************************************************
+ *  Compilation:  javac -d bin ElasticSearchConfig.java
+ *  Execution:    java -cp bin com.bridgelabz.config;
+ *  						  
+ *  
+ *  Purpose:      ElasticSearch configuration class
+ *  @author  Shubham Chavan
+ *  @version 1.0
+ *  @since   11-12-2019
+ *
+ ******************************************************************************/
 package com.bridgelabz.dto;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import com.bridgelabz.model.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+/**
+ * @author admin1
+ *
+ */
 public class NoteCollaborateDto {
 
 	private int noteId;
@@ -12,8 +30,14 @@ public class NoteCollaborateDto {
 	private boolean isArchive;
 	private boolean isPin;
 	private String reminder;
+	private List<String> collaborateUser = new ArrayList<>();
 	
-	
+	public List<String> getCollaborateUser() {
+		return collaborateUser;
+	}
+	public void setCollaborateUser(List<String> collaborateUser) {
+		this.collaborateUser = collaborateUser;
+	}
 	public String getReminder() {
 		return reminder;
 	}

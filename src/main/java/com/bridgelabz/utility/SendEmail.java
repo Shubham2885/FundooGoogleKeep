@@ -1,9 +1,22 @@
+/******************************************************************************
+ *  Compilation:  javac -d bin ElasticSearchConfig.java
+ *  Execution:    java -cp bin com.bridgelabz.config;
+ *  						  
+ *  
+ *  Purpose:      ElasticSearch configuration class
+ *  @author  Shubham Chavan
+ *  @version 1.0
+ *  @since   11-12-2019
+ *
+ ******************************************************************************/
 package com.bridgelabz.utility;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
+
+import com.bridgelabz.exception.custome.CustomException;
 
 @Component
 public class SendEmail {
@@ -13,21 +26,19 @@ public class SendEmail {
 	@Autowired
 	SimpleMailMessage mailMessage;
 	
-	public String accountEmailVarification(String token,String email)
-	{
-		mailMessage.setTo(MessageReference.SENDER_MAIL,email);
-		mailMessage.setSubject(MessageReference.VERIFY_MAIL_SUBJECT);
-		mailMessage.setText(MessageReference.VERIFY_MAIL_TEXT+token);
-		javaMailSender.send(mailMessage);
-		return MessageReference.MAIL_SENDED;
+	public void sendMail(String token,String email,String subject,String text) {
+		try {
+			send(token, email, subject, text);
+		}catch (Exception e) {
+			throw new CustomException.MailError(MessageReference.MAIL_ERROR);
+		}
 	}
 	
-	public String resetPasswordMail(String email,String token)
-	{
+	private void send(String token,String email,String subject,String text) {
 		mailMessage.setTo(MessageReference.SENDER_MAIL,email);
-		mailMessage.setSubject(MessageReference.RESET_PASSWORD_MAIL_SUBJECT);
-		mailMessage.setText(MessageReference.RESET_PASSWORD_MAIL_TEXT+token);
+		mailMessage.setSubject(subject);
+		mailMessage.setText(text+token);
 		javaMailSender.send(mailMessage);
-		return MessageReference.RESET_PASSWORD_MAIL_SENDED_MESSAGE;
 	}
+	
 }

@@ -1,25 +1,25 @@
+/******************************************************************************
+ *  Compilation:  javac -d bin ElasticSearchConfig.java
+ *  Execution:    java -cp bin com.bridgelabz.config;
+ *  						  
+ *  
+ *  Purpose:      ElasticSearch configuration class
+ *  @author  Shubham Chavan
+ *  @version 1.0
+ *  @since   11-12-2019
+ *
+ ******************************************************************************/
 package com.bridgelabz.model;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name ="User")
@@ -40,8 +40,16 @@ public class User {
 	private Date creationTimeStamp;
 	@UpdateTimestamp
 	private Date updateTimeStamp;
+	private String profilePic;
+	public String getProfilePic() {
+		return profilePic;
+	}
+	public void setProfilePic(String profilePic) {
+		this.profilePic = profilePic;
+	}
 
-/*	
+	/*	
+ * 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name="User_Collaborator",joinColumns = {
 			@JoinColumn(name="id",nullable = false)},inverseJoinColumns = {
@@ -70,6 +78,7 @@ public class User {
 		return id;
 	}
 	
+
 	public String getFirstName() {
 		return firstName;
 	}

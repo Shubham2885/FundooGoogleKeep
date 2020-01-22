@@ -9,5 +9,6 @@ class SpringBootFundooUserSecurityJwtMysqlApplicationTests {
 	@Test
 	void contextLoads() {
 	}
+	
 
 }

@@ -1,3 +1,14 @@
+/******************************************************************************
+ *  Compilation:  javac -d bin ElasticSearchConfig.java
+ *  Execution:    java -cp bin com.bridgelabz.config;
+ *  						  
+ *  
+ *  Purpose:      ElasticSearch configuration class
+ *  @author  Shubham Chavan
+ *  @version 1.0
+ *  @since   11-12-2019
+ *
+ ******************************************************************************/
 package com.bridgelabz.model;
 
 import java.util.ArrayList;
@@ -24,6 +35,7 @@ public class Label {
 	
 	@ManyToOne
 	@JoinColumn(name = "userId",nullable = false)
+	@JsonIgnoreProperties({"firstName","lastName","email","mobileNumber","active","password","creationTimeStamp","updateTimeStamp","profilePic"})
 	private User user = new User();
 	
 	/*

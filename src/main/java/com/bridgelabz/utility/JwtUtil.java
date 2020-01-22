@@ -1,3 +1,14 @@
+/******************************************************************************
+ *  Compilation:  javac -d bin ElasticSearchConfig.java
+ *  Execution:    java -cp bin com.bridgelabz.config;
+ *  						  
+ *  
+ *  Purpose:      ElasticSearch configuration class
+ *  @author  Shubham Chavan
+ *  @version 1.0
+ *  @since   11-12-2019
+ *
+ ******************************************************************************/
 package com.bridgelabz.utility;
 
 import java.util.Date;
@@ -5,11 +16,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-import com.bridgelabz.exception.custome.ExpiredJwtTokenExeception;
+import com.bridgelabz.exception.custome.CustomException;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -46,7 +56,7 @@ public class JwtUtil {
 		try {
 			return extractEpiration(token).before(new Date());	
 		}catch (ExpiredJwtException e) {
-			throw new ExpiredJwtTokenExeception("Token is Expired you neet to login");
+			throw new CustomException.ExpiredJwtTokenExeception("Token is Expired you neet to login");
 		}
 	}
 //	public String generateToken(UserDetails userDetails)

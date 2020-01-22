@@ -1,3 +1,14 @@
+/******************************************************************************
+ *  Compilation:  javac -d bin ElasticSearchConfig.java
+ *  Execution:    java -cp bin com.bridgelabz.config;
+ *  						  
+ *  
+ *  Purpose:      ElasticSearch configuration class
+ *  @author  Shubham Chavan
+ *  @version 1.0
+ *  @since   11-12-2019
+ *
+ ******************************************************************************/
 package com.bridgelabz.utility;
 
 public class MessageReference {
@@ -9,4 +20,5 @@ public class MessageReference {
 	 public static final String RESET_PASSWORD_MAIL_TEXT ="\\t Reset Password Email \\n\"+\"http://localhost:8080/fundoo/resetPassword?token=";
 	 public static final String RESET_PASSWORD_MAIL_SUBJECT="Reset Password Mail";
 	 public static final String RESET_PASSWORD_MAIL_SENDED_MESSAGE="Reset Password Mail has been sent on your register mail";
+	 public static final String MAIL_ERROR="Internal Mail Error";
 }

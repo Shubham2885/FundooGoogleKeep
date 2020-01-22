@@ -1,3 +1,14 @@
+/******************************************************************************
+ *  Compilation:  javac -d bin ElasticSearchConfig.java
+ *  Execution:    java -cp bin com.bridgelabz.config;
+ *  						  
+ *  
+ *  Purpose:      ElasticSearch configuration class
+ *  @author  Shubham Chavan
+ *  @version 1.0
+ *  @since   11-12-2019
+ *
+ ******************************************************************************/
 package com.bridgelabz.dto;
 
 import javax.validation.constraints.NotEmpty;
@@ -14,7 +25,6 @@ public class NoteDto {
 	@Size(min = 2, max = 1000, message = "must be 3 to 1000 charecters")
 	private String description;
 	private String color;
-	private String reminder;
 	public String getTitle() {
 		return title;
 	}
@@ -24,9 +34,6 @@ public class NoteDto {
 	public String getColor() {
 		return color;
 	}
-	public String getReminder() {
-		return reminder;
-	}
 	public void setTitle(String title) {
 		this.title = title;
 	}
@@ -35,8 +42,5 @@ public class NoteDto {
 	}
 	public void setColor(String color) {
 		this.color = color;
-	}
-	public void setReminder(String reminder) {
-		this.reminder = reminder;
 	}
 }

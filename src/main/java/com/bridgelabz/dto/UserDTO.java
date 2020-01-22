@@ -1,38 +1,43 @@
+/******************************************************************************
+ *  Compilation:  javac -d bin ElasticSearchConfig.java
+ *  Execution:    java -cp bin com.bridgelabz.config;
+ *  						  
+ *  
+ *  Purpose:      ElasticSearch configuration class
+ *  @author  Shubham Chavan
+ *  @version 1.0
+ *  @since   11-12-2019
+ *
+ ******************************************************************************/
 package com.bridgelabz.dto;
 
-import java.util.Date;
 
 import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-
-import net.bytebuddy.implementation.bytecode.Throw;
-
 public class UserDTO {
 
-	@NotEmpty
+	@NotEmpty(message = "Please Fill FirstName")
 	@Size(min = 2, max = 30, message = "must be 3 charecter")
 	@Pattern(regexp = "^[a-zA-Z]+$", message = "Invalid First Name")
 	private String firstName;
-	@NotEmpty
+	@NotEmpty(message = "Please Fill LastName")
 	@Size(min = 2, max = 30, message = "must be 3 charecter")
 	@Pattern(regexp = "^[a-zA-Z]+$", message = "Invalid Last Name")
 	private String lastName;
-	@NotEmpty
+	@NotEmpty(message = "Please Fill Email")
 	@Pattern(regexp = "^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$", message = "Invalid Email Address")
 	private String email;
-	@NotEmpty
+	@NotEmpty(message = "Please Fill Mobile Number")
 	@Pattern(regexp = "^(0|91)?[7-9][0-9]{9}$", message = "Invalid Mobile Number")
 	private String mobileNumber;
-	@NotEmpty
+	@NotEmpty(message = "Please Fill Password")
 	@Pattern(regexp = "^((?=.*[a-z])(?=.*\\d)(?=.*[A-Z])(?=.*[@#$%!]).{5,15})$", message = "Password should Contain between 5 and 15 long,Contain at least one digitat,one lower case,one upper case and special character from [@#$%!.]")
 	private String password;
 	@Transient
-	@NotEmpty
+	@NotEmpty(message = "Please Fill Check Password")
 	@Pattern(regexp = "^((?=.*[a-z])(?=.*\\d)(?=.*[A-Z])(?=.*[@#$%!]).{5,15})$", message = "Check Password should Contain between 5 and 15 long,Contain at least one digitat,one lower case,one upper case and special character from [@#$%!.]")
 	private String checkPassword;
 

@@ -11,13 +11,10 @@
  ******************************************************************************/
 package com.bridgelabz.reposiitory;
 
-import java.util.List;
+import com.bridgelabz.model.RedisModel;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-
-import com.bridgelabz.model.Note;
-
-public interface NoteRepository extends JpaRepository<Note, Integer>{
-	List<Note> findByUserId(int userId);
-	//Note findByUserIdAndNoteId(int userId,int noteId);
+public interface IRedisRepository{
+	void add(RedisModel model);
+	long delete(String id);
+	RedisModel findUser(String id);
 }
