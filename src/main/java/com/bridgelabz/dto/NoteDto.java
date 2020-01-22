@@ -1,12 +1,13 @@
 /******************************************************************************
- *  Compilation:  javac -d bin ElasticSearchConfig.java
- *  Execution:    java -cp bin com.bridgelabz.config;
+ *  Compilation:  javac -d bin NoteDto.java
+ *  Execution:    java -cp bin com.bridgelabz.dto;
  *  						  
  *  
- *  Purpose:      ElasticSearch configuration class
+ *  Purpose:      This class transfer note details from controller to service
+                  also validate some fields of note 
  *  @author  Shubham Chavan
  *  @version 1.0
- *  @since   11-12-2019
+ *  @since   30-12-2019
  *
  ******************************************************************************/
 package com.bridgelabz.dto;
