@@ -1,12 +1,12 @@
 /******************************************************************************
- *  Compilation:  javac -d bin ElasticSearchConfig.java
- *  Execution:    java -cp bin com.bridgelabz.config;
+ *  Compilation:  javac -d bin NoteCollaborateDto.java
+ *  Execution:    java -cp bin com.bridgelabz.dto;
  *  						  
  *  
- *  Purpose:      ElasticSearch configuration class
+ *  Purpose:      This class hold collaborate note data for transfering data to controller
  *  @author  Shubham Chavan
  *  @version 1.0
- *  @since   11-12-2019
+ *  @since   30-12-2019
  *
  ******************************************************************************/
 package com.bridgelabz.dto;
@@ -17,10 +17,6 @@ import java.util.List;
 import com.bridgelabz.model.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-/**
- * @author admin1
- *
- */
 public class NoteCollaborateDto {
 
 	private int noteId;
