@@ -25,7 +25,9 @@ public class ElasticSearchConfig {
 	private String elasticSearchHost;
 	@Value("${elasticsearch.port}")
 	private Integer elasticSearchPort;
-	
+	/*
+	*
+	*/
 	@Bean
 	public RestHighLevelClient client() {
 		RestHighLevelClient client = new RestHighLevelClient(
