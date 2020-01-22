@@ -1,12 +1,12 @@
 /******************************************************************************
- *  Compilation:  javac -d bin ElasticSearchConfig.java
- *  Execution:    java -cp bin com.bridgelabz.config;
+ *  Compilation:  javac -d bin UserController.java
+ *  Execution:    java -cp bin com.bridgelabz.controller;
  *  						  
  *  
- *  Purpose:      ElasticSearch configuration class
+ *  Purpose:      This is a User controller class
  *  @author  Shubham Chavan
  *  @version 1.0
- *  @since   11-12-2019
+ *  @since   29-12-2019
  *
  ******************************************************************************/
 package com.bridgelabz.controller;
