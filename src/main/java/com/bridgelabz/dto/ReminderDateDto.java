@@ -1,12 +1,12 @@
 /******************************************************************************
- *  Compilation:  javac -d bin ElasticSearchConfig.java
- *  Execution:    java -cp bin com.bridgelabz.config;
+ *  Compilation:  javac -d bin ReminderDateDto.java
+ *  Execution:    java -cp bin com.bridgelabz.dto;
  *  						  
  *  
- *  Purpose:      ElasticSearch configuration class
+ *  Purpose:      This class validate date of reminder
  *  @author  Shubham Chavan
  *  @version 1.0
- *  @since   11-12-2019
+ *  @since   02-01-2020
  *
  ******************************************************************************/
 package com.bridgelabz.dto;
